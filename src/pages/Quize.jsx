@@ -22,6 +22,7 @@ const Quiz = () => {
     import.meta.env.MODE === "development"
       ? "/api"
       : import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
 
   const user = localStorage.getItem("name");
