@@ -44,22 +44,30 @@ Open your browser and navigate to http://localhost:3000.
 API Proxy Configuration
 The Vite configuration file (vite.config.js) includes a proxy setup to handle API requests. This ensures that API calls are routed through the development server, avoiding CORS issues during development.
 
-// vite.config.js
+<!-- // vite.config.js -->
+
 import { defineConfig } from 'vite';
 import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
 plugins: [tailwindcss()],
 server: {
-proxy: {
+proxy:
+process.env.NODE_ENV === "development"
+? {
 "/api": {
-target: "https://api.jsonserve.com", // Your API endpoint
+target: "https://api.jsonserve.com", // Your actual API endpoint
 changeOrigin: true,
 rewrite: (path) => path.replace(/^\/api/, ""),
 },
-},
+}
+: {},
 },
 });
+
+<!-- SOME IMPORTANT CHANGES -->
+
+i have facing issues with api url as there is CORS issues so i need to store the data locally in public directory and i am fetcing data from there , once api get fix issues will be fixed only need is to change the api url.
 
 <!-- LOCAl storage  -->
 
@@ -125,10 +133,12 @@ Project Structure
 | |-- result.svg , puzzle.svg etc..... # SVG illustrations
 |-- /src
 | |-- /components
+| |--|--Hint.jsx
+| |--|--Timer.jsx
 | |-- /pages
 | | |-- Home.jsx  
 | | |-- Result.jsx # Displays results after the quiz
-|--Quize.jsx # Displays the main quiz page
+| | |--Quize.jsx # Displays the main quiz page
 | |-- App.jsx # Main React component
 | |-- index.js # React entry point
 |-- /styles

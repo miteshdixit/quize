@@ -6,6 +6,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Hint from "../components/Hint";
+import Timer from "../components/Timer";
 
 const Quiz = () => {
   const [questionsArray, setQuestionsArray] = useState([]);
@@ -18,26 +20,25 @@ const Quiz = () => {
   const [count, setCount] = useState(60);
   const [openHint, setOpenHint] = useState(false);
 
-  const apiUrl =
-    import.meta.env.MODE === "development"
-      ? "/api"
-      : import.meta.env.VITE_API_URL;
-
   const navigate = useNavigate();
 
   const user = localStorage.getItem("name");
+  //   const apiUrl =
+  //     import.meta.env.MODE === "development"
+  //       ? "/api"
+  //       : import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/Uw5CrX`);
+        const response = await axios.get("/data.json");
         console.log("Data fetched successfully:", response.data);
-
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+
     fetchData();
   }, []);
 
@@ -80,31 +81,23 @@ const Quiz = () => {
     handleNext();
   }
 
-  // Handle "next" button click
-
-  // Handle "previous" button click
-  //   const handlePrevious = () => {
-  //     if (currentQuestion > 0) {
-  //       setCurrentQuestion(currentQuestion - 1);
-  //       setSelectedOption(null);
-  //       setIsAnswerSelected(false);
-  //     }
-  //   };
-
+  //   array of questions
   useEffect(() => {
     if (data && data.questions) {
       const array = Object.values(data.questions);
-      setQuestionsArray(array); // Store converted array in state
+      setQuestionsArray(array);
       console.log("Data questions:", array);
     }
   }, [data]);
 
+  //   loading
   if (!data) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="p-5 relative h-screen bg-teal-700">
+      {/* illustrations */}
       <div className="absolute top-[35%] right-[-10%]  z-1000 md:right-[23%]">
         <img
           src="Questions-bro.svg"
@@ -126,61 +119,18 @@ const Quiz = () => {
       {/* question and timer Section */}
       <div className="text-center">
         <div className="flex flex-col justify-center h-40  p-5 rounded-xl mt-20 mb-15 bg-white  shadow-xl relative">
-          <div
-            className="absolute rounded-full h-18 w-18 p-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-[-5%] bg-orange-50 flex items-center justify-center"
-            style={{
-              width: "50px",
-              height: "50px",
-              borderRadius: "50%",
-              background: `radial-gradient(closest-side, white 80%, transparent 80% 100%), conic-gradient(hotpink ${
-                (count / 60) * 100
-              }%, pink 0)`,
-            }}
-          >
-            <div className="text-black text-3xl font-bold">{count}</div>
+          {/* Timer */}
+          <Timer count={count} />
+
+          <div className="overflow-y-scroll">
+            <Hint
+              openHint={openHint}
+              setOpenHint={setOpenHint}
+              detailedSolution={
+                questionsArray[currentQuestion]?.detailed_solution
+              }
+            />
           </div>
-
-          {/* hint icons */}
-          <div
-            className="absolute justify-center
-          
-          items-center mt-2 top-[-23%] right-1"
-          >
-            <div
-              className="w-6 h-6 flex items-center justify-center bg-gray-200 rounded-full cursor-pointer"
-              onClick={() => {
-                setOpenHint(true);
-              }}
-            >
-              <FcIdea className="text-xl" />
-            </div>
-          </div>
-
-          {/* hint content */}
-          {openHint && (
-            <>
-              <div className="fixed inset-0 bg-white opacity-80 backdrop-blur-md  "></div>
-
-              <div className="absolute top-12 left-2 w-80 h-40 bg-white rounded-4xl shadow-3xl p-3 overflow-y-auto z-20 border  ">
-                <button
-                  onClick={() => setOpenHint(false)}
-                  className="absolute top-[-2%] right-2 text-2xl font-bold rounded-3xl text-pink-500 hover:text-pink-700 transition-all "
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                    border: "none",
-                    background: "none",
-                  }}
-                >
-                  &times;
-                </button>
-                <div className="text-sm text-left">
-                  {questionsArray[currentQuestion].detailed_solution}
-                </div>
-              </div>
-            </>
-          )}
 
           {/* question box */}
           <div className="overflow-hidden  ">
