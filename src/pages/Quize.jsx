@@ -18,6 +18,10 @@ const Quiz = () => {
   const [count, setCount] = useState(60);
   const [openHint, setOpenHint] = useState(false);
 
+  const apiUrl =
+    import.meta.env.MODE === "development"
+      ? "/api"
+      : import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const user = localStorage.getItem("name");
@@ -25,9 +29,8 @@ const Quiz = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/Uw5CrX");
+        const response = await axios.get(`${apiUrl}/Uw5CrX`);
         console.log("Data fetched successfully:", response.data);
-        console.log("data", Object.values(response.data.questions)[0].topic);
 
         setData(response.data);
       } catch (error) {

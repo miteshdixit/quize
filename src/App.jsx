@@ -7,7 +7,7 @@ import Results from "./pages/Result";
 const App = () => {
   return (
     <Router>
-      <div className="">
+      <div className="overflow-hidden">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
