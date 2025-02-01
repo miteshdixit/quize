@@ -13,7 +13,7 @@ const Results = () => {
         background: "linear-gradient(135deg, #3A6E73, #004643)",
       }}
     >
-      <div className="absolute top-[5%] right-[-10%]  z-1000">
+      <div className="absolute top-[5%] right-[-10%]  z-1000 md:right-[23%] md:top-[18%]">
         <img
           src="result.svg"
           alt="starting svg"
