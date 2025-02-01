@@ -101,6 +101,14 @@ const Quiz = () => {
 
   return (
     <div className="p-5 relative h-screen bg-teal-700">
+      <div className="absolute top-[35%] right-[-10%]  z-1000 md:right-[23%]">
+        <img
+          src="Questions-bro.svg"
+          alt="starting svg"
+          className=" h-[5%] w-[50%] opacity-50 "
+        />
+      </div>
+
       <div className="absolute top-5 left-5 flex items-center gap-2 cursor-pointer text-white">
         <FaRegCircleUser className="text-xl" />
         <span>{user}</span>
@@ -186,11 +194,11 @@ const Quiz = () => {
         </div>
 
         {/* options sections */}
-        <div className="mt-4 ">
+        <div className="mt-4 flex flex-col justify-center items-center ">
           {questionsArray[currentQuestion]?.options?.map((option, index) => (
             <button
               key={index}
-              className={`mt-3 px-4 py-2 text-black rounded-xl w-full shadow-xl text-lg flex items-center justify-between border-[#f6f0b9] border-1
+              className={`mt-3 px-4 py-2 text-black rounded-3xl w-[95%] shadow-xl text-lg flex items-center justify-between border-[#f6f0b9] border-1
         ${
           isAnswerSelected
             ? option.is_correct

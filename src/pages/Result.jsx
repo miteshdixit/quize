@@ -8,11 +8,19 @@ const Results = () => {
 
   return (
     <div
-      className="flex flex-col justify-center items-center h-screen w-full text-center p-8"
+      className="flex flex-col justify-center items-center h-screen w-full text-center p-8 relative"
       style={{
         background: "linear-gradient(135deg, #3A6E73, #004643)",
       }}
     >
+      <div className="absolute top-[5%] right-[-10%]  z-1000">
+        <img
+          src="result.svg"
+          alt="starting svg"
+          className=" h-[5%] w-[50%] opacity-100 "
+        />
+      </div>
+
       <div className="bg-white shadow-2xl rounded-3xl p-6 w-full max-w-md">
         <h1 className="text-4xl font-bold text-[#004643]">🎉 Results 🎉</h1>
         <h2 className="text-2xl font-semibold text-[#3A6E73] mt-2">

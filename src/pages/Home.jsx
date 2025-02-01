@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <div
-      className="flex flex-col justify-between items-center h-screen w-full text-center p-8"
+      className="flex flex-col justify-between items-center h-screen w-full text-center p-8 relative"
       style={{ backgroundColor: "#3A6E73" }}
     >
       <div className="bg-white h-36 w-36 rounded-full mt-20  shadow-2xl flex justify-center items-center">
@@ -51,6 +51,21 @@ const Home = () => {
         >
           Start
         </button>
+      </div>
+
+      <div className="absolute top-[3%] md:top-[5%] lg:top-[6%] rotate-20">
+        <img
+          src="start.svg"
+          alt="starting svg"
+          className="h-[10%] w-[70%] sm:h-[15%] md:h-[12%] lg:h-[10%]"
+        />
+      </div>
+      <div className="absolute top-[43%] sm:top-[45%] md:top-[57%] right-[-60%] sm:right-[-40%] md:right-[0%] z-[1000] xl:right-[23%] ">
+        <img
+          src="puzzle.svg"
+          alt="starting svg"
+          className="h-[4%] w-[40%] sm:h-[8%] md:h-[6%] lg:h-[5%]"
+        />
       </div>
     </div>
   );
