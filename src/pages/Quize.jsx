@@ -96,13 +96,21 @@ const Quiz = () => {
   }
 
   return (
-    <div className="p-5 relative h-screen bg-teal-700">
+    <div className="p-5 relative h-screen bg-teal-700 z-10">
       {/* illustrations */}
-      <div className="absolute top-[35%] right-[-10%]  z-1000 md:right-[23%]">
+      <div className="absolute top-0 left-0 w-screen h-screen">
+        <img
+          src="zig-zag.svg"
+          alt="Background"
+          className="w-full h-full object-cover opacity-40"
+        />
+      </div>
+
+      <div className="absolute top-[25%] right-[-10%]  z-1000 md:right-[23%]">
         <img
           src="Questions-bro.svg"
           alt="starting svg"
-          className=" h-[5%] w-[50%] opacity-50 "
+          className=" h-[5%] w-[50%] opacity-40 "
         />
       </div>
 
@@ -112,17 +120,17 @@ const Quiz = () => {
       </div>
 
       {/* question number */}
-      <div className="text-center text-xl font-bold text-white">
+      <div className="text-center text-xl font-bold text-white z-[10]">
         {currentQuestion + 1}/{data?.questions?.length}
       </div>
 
       {/* question and timer Section */}
-      <div className="text-center">
+      <div className="text-center z-10">
         <div className="flex flex-col justify-center h-40  p-5 rounded-xl mt-20 mb-15 bg-white  shadow-xl relative">
           {/* Timer */}
           <Timer count={count} />
 
-          <div className="overflow-y-scroll">
+          <div className="overflow-y-scroll z-20 text-center  justify-center">
             <Hint
               openHint={openHint}
               setOpenHint={setOpenHint}
@@ -135,7 +143,7 @@ const Quiz = () => {
           {/* question box */}
           <div className="overflow-hidden  ">
             <h2
-              className="text-lg font-bold break-words text-ellipsis overflow-hidden "
+              className="text-lg font-bold break-words text-ellipsis overflow-hidden  "
               style={{
                 wordWrap: "break-word",
                 textAlign: "justify",
@@ -148,11 +156,11 @@ const Quiz = () => {
         </div>
 
         {/* options sections */}
-        <div className="mt-4 flex flex-col justify-center items-center ">
+        <div className="mt-4 flex flex-col justify-center items-center z-10 ">
           {questionsArray[currentQuestion]?.options?.map((option, index) => (
             <button
               key={index}
-              className={`mt-3 px-4 py-2 text-black rounded-3xl w-[95%] shadow-xl text-lg flex items-center justify-between border-[#f6f0b9] border-1
+              className={`mt-3 px-4 py-2 text-black rounded-3xl w-[95%] shadow-xl text-lg flex items-center justify-between border-[#f6f0b9] border-1 z-10
         ${
           isAnswerSelected
             ? option.is_correct
@@ -183,7 +191,7 @@ const Quiz = () => {
         {isAnswerSelected && (
           <button
             onClick={handleNext}
-            className="top-4 right-3 flex font-bold items-center cursor-pointer absolute text-[#ddd] text-xl"
+            className="bottom-6 right-3 flex font-bold items-center cursor-pointer absolute text-[#ddd] text-xl z-10"
           >
             {currentQuestion + 1 === data.questions_count ? "Submit" : "Next"}
             <MdKeyboardArrowRight className="ml-1 text-[#ddd] text-3xl" />
