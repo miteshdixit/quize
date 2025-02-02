@@ -15,7 +15,7 @@ const Hint = ({ openHint, setOpenHint, detailedSolution }) => {
 
       {openHint && (
         <>
-          <div className="fixed inset-0 bg-white opacity-85 backdrop-blur-md "></div>
+          <div className="fixed inset-0 bg-white opacity-85 backdrop-blur-md justify-center"></div>
 
           <div className="absolute top-12 left-2 w-80 h-40 bg-white rounded-4xl shadow-3xl p-3 overflow-y-scroll z-9990 border  ">
             <button
